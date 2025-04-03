@@ -81,7 +81,6 @@ Please refer directly to the script to change settings (adapt timeout, set of in
 - **D3**: Maximum 3 consecutive plies with the same angle
 - **D4**: Vertical Symmetry Constraint with the exception of a dysymmetry in th middle 2 or 3 plies in an even or odd thickness respectively
 - **D5**: Surface plies can only take -45°/45° angle
-- **D6**: Uniform distribution of 0° and 90° plies
 
 ## MiniZinc Models
 
