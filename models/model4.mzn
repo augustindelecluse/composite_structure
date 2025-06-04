@@ -81,7 +81,7 @@ constraint forall(i in 1..m)
     (indexes[i, thickness[edges[i].2]] >= thickness[edges[i].1]-4);
 % -- B4 max 3 dropped plies: |indexi - indexi+1| <= 4
 constraint forall(i in 1..m, j in 1..thickness[edges[i].2]-1)
-    ((indexes[i, j] - indexes[i, j+1]) <= 4);
+    ((indexes[i, j+1] - indexes[i, j]) <= 4);
 
 % -- D1 a given number of plies in each direction is given
 constraint forall(i in 1..n)
