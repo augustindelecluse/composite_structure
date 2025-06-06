@@ -1,4 +1,4 @@
-from checker.utils.dzn_utils import read_dzn_array, read_dzn
+from modules.utils.dzn_utils import read_dzn_array, read_dzn
 
 
 class CSInstance:
@@ -90,5 +90,5 @@ class CSInstance:
 
 
 if __name__ == '__main__':
-    instance = CSInstance("../../instances/3x3/random_grid_bench_3_3_009.dzn")
+    instance = CSInstance("../../../instances/3x3/random_grid_bench_3_3_009.dzn")
     print(instance)

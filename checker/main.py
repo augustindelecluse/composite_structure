@@ -1,4 +1,5 @@
 import argparse
+from argparse import RawTextHelpFormatter
 
 
 def parse_args():
@@ -7,9 +8,9 @@ def parse_args():
         "DESCRIPTION\n"
         "---------------------------------------\n"
         "Check the validity of solutions of the composite structure problem.\n\n"
-        "INPUT FILE\n"
+        "INSTANCE FILE\n"
         "---------------------------------------\n"
-        "The input file must be in .dzn format and must contain the following elements:\n"
+        "The instance file must be in .dzn format and must contain the following elements:\n"
         "  - edges: an array of tuples that represents the edges from the input graph.\n"
         "    The first element of the tuple is the parent (thickest sequence) while the second element is the child.\n"
         "    EXAMPLE: if we have the graph 0 -> 1 -> 2, the edges array will be:\n"
@@ -36,10 +37,11 @@ def parse_args():
         "             ...\n"
         "             i0 = [0, 1, 2, 3];\n"
         "             i1 = [0, 1, 2, 3];\n"
-        "             ...\n"
+        "             ...\n",
+        formatter_class=RawTextHelpFormatter,
     )
-    parser.add_argument("instance file", type=str, help="The instance file of the composite structure.")
-    parser.add_argument("solution file", type=str, help="The solution file to check against the instance.")
+    parser.add_argument("instance_file", type=str, help="The instance file of the composite structure.")
+    parser.add_argument("solution_file", type=str, help="The solution file to check against the instance.")
     parser.add_argument("--verbose", "-v", action="store_true", help="Enable verbose output.", default=False)
     return parser.parse_args()
 
@@ -50,13 +52,6 @@ def check_equivalence(instance, solution):
     :param instance: instance of CSInstance containing the problem data.
     :param solution: solution of CSSolution containing the sequences and indexes.
     """
-    if instance.T() != solution.T():
-        raise ValueError(
-            f"Thickness mismatch: instance T = {instance.T()}, solution T = {solution.T()}. "
-            "The solution must have the same thickness as the instance.\n"
-            "Please make sure that the solution file matches the instance file."
-        )
-
     if instance.n() != len(solution.sequences()):
         raise ValueError(
             f"Number of sequences mismatch: instance n = {instance.n()}, "

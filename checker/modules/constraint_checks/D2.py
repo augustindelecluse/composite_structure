@@ -1,4 +1,4 @@
-from checker.classes import CSInstance, CSSolution
+from modules.classes import CSInstance, CSSolution
 
 
 def check_d2(instance: CSInstance, solution: CSSolution, verbose: bool) -> bool:
@@ -16,8 +16,11 @@ def check_d2(instance: CSInstance, solution: CSSolution, verbose: bool) -> bool:
             if abs(seq[seq_idx] - seq[seq_idx + 1]) == 2:
                 if verbose:
                     print(
-                        f"Sequence {sequences.index(seq)} D2 constraint violation: "
-                        f"plies {seq[seq_idx]} and {seq[seq_idx + 1]} differ by 2 (equivalent of 90° gap)."
+                        "----------------------------------\n"
+                        f"Sequence {sequences.index(seq)} D2 constraint violation: \n"
+                        f"\tplies {seq[seq_idx]} and {seq[seq_idx + 1]} differ by 2 (equivalent of 90° gap).\n"
+                        "----------------------------------\n"
                     )
+                return False
 
     return True

@@ -1,4 +1,4 @@
-from checker.classes import CSInstance, CSSolution
+from modules.classes import CSInstance, CSSolution
 
 
 def check_b1(instance: CSInstance, solution: CSSolution, verbose: bool) -> bool:
@@ -18,10 +18,12 @@ def check_b1(instance: CSInstance, solution: CSSolution, verbose: bool) -> bool:
             if ply != sequences[parent][indexes[edge_idx][ply_idx]]:
                 if verbose:
                     print(
-                        f"Edge {edge_idx} ({parent}-->{child}) ply {ply_idx} blending error: "
-                        f"indexes[{edge_idx}][{ply_idx}]={indexes[edge_idx][ply_idx]}, "
-                        f"parent[{indexes[edge_idx][ply_idx]}]={sequences[parent][indexes[edge_idx][ply_idx]]}, "
-                        f"child[{ply_idx}]={ply}"
+                        "----------------------------------\n"
+                        f"Edge {edge_idx} ({parent}-->{child}) ply {ply_idx} blending error: \n"
+                        f"\tindexes[{edge_idx}][{ply_idx}]={indexes[edge_idx][ply_idx]}, \n"
+                        f"\tparent[{indexes[edge_idx][ply_idx]}]={sequences[parent][indexes[edge_idx][ply_idx]]}, \n"
+                        f"\tchild[{ply_idx}]={ply}\n"
+                        "----------------------------------\n"
                     )
                 return False
 

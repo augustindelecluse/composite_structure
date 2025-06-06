@@ -1,4 +1,4 @@
-from checker.classes import CSInstance, CSSolution
+from modules.classes import CSInstance, CSSolution
 import math
 
 
@@ -10,7 +10,7 @@ def check_d4(instance: CSInstance, solution: CSSolution, verbose: bool) -> bool:
     :param verbose: boolean flag to print detailed mismatch information.
     :return: boolean indicating whether the D4 constraint is satisfied.
     """
-    authorized_middle = {
+    authorized_middle = [
         [1, 1],
         [2, 2],
         [3, 3],
@@ -29,7 +29,7 @@ def check_d4(instance: CSInstance, solution: CSSolution, verbose: bool) -> bool:
         [1, 4, 3],
         [3, 2, 1],
         [3, 4, 1],
-    }
+    ]
 
     sequences = solution.sequences()
 
@@ -41,9 +41,11 @@ def check_d4(instance: CSInstance, solution: CSSolution, verbose: bool) -> bool:
             if seq[ply_idx] != seq[(len(seq) - 1) - ply_idx]:
                 if verbose:
                     print(
-                        f"Sequence {sequences.index(seq)} D4 symmetry constraint violation: "
-                        f"ply {ply_idx} ({seq[ply_idx]}) does not match "
-                        f"ply {len(seq) - 1 - ply_idx} ({seq[len(seq) - 1 - ply_idx]})."
+                        "----------------------------------\n"
+                        f"Sequence {sequences.index(seq)} D4 symmetry constraint violation: \n"
+                        f"\tply {ply_idx} ({seq[ply_idx]}) does not match \n"
+                        f"\tply {len(seq) - 1 - ply_idx} ({seq[len(seq) - 1 - ply_idx]}).\n"
+                        "----------------------------------\n"
                     )
                 return False
 

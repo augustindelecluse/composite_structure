@@ -1,4 +1,4 @@
-from checker.classes import CSInstance, CSSolution
+from modules.classes import CSInstance, CSSolution
 
 
 def check_b4(instance: CSInstance, solution: CSSolution, verbose: bool) -> bool:
@@ -17,10 +17,12 @@ def check_b4(instance: CSInstance, solution: CSSolution, verbose: bool) -> bool:
             if (indexes[edge_idx][ply_idx + 1] - indexes[edge_idx][ply_idx]) > 4:
                 if verbose:
                     print(
-                        f"Edge {edge_idx} ({parent}-->{child}) ply {ply_idx} B4 constraint violation: "
-                        f"indexes[{edge_idx}][{ply_idx + 1}]={indexes[edge_idx][ply_idx + 1]}, "
-                        f"indexes[{edge_idx}][{ply_idx}]={indexes[edge_idx][ply_idx]}, "
-                        f"difference={indexes[edge_idx][ply_idx + 1] - indexes[edge_idx][ply_idx]}"
+                        "----------------------------------\n"
+                        f"Edge {edge_idx} ({parent}-->{child}) ply {ply_idx} B4 constraint violation: \n"
+                        f"\tindexes[{edge_idx}][{ply_idx}]={indexes[edge_idx][ply_idx]}, \n"
+                        f"\tindexes[{edge_idx}][{ply_idx + 1}]={indexes[edge_idx][ply_idx + 1]}, \n"
+                        f"\tdifference={indexes[edge_idx][ply_idx + 1] - indexes[edge_idx][ply_idx]}\n"
+                        "----------------------------------\n"
                     )
                 return False
 

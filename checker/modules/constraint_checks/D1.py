@@ -1,4 +1,4 @@
-from checker.classes import CSInstance, CSSolution
+from modules.classes import CSInstance, CSSolution
 
 
 def check_d1(instance: CSInstance, solution: CSSolution, verbose: bool) -> bool:
@@ -11,7 +11,7 @@ def check_d1(instance: CSInstance, solution: CSSolution, verbose: bool) -> bool:
     """
     sequences = solution.sequences()
     actual_counts = [[0, 0, 0, 0] for _ in range(len(sequences))]
-    expected_counts = solution.counts()
+    expected_counts = instance.counts()
 
     for seq_idx, seq in enumerate(sequences):
         for ply in seq:
@@ -24,8 +24,11 @@ def check_d1(instance: CSInstance, solution: CSSolution, verbose: bool) -> bool:
             if actual_count != expected_count:
                 if verbose:
                     print(
-                        f"Sequence {seq_idx} ply count mismatch (D1 constraint violation): "
-                        f"actual={actual_counts[seq_idx]}, expected={expected_counts[seq_idx]}"
+                        "----------------------------------\n"
+                        f"Sequence {seq_idx} ply count mismatch (D1 constraint violation): \n"
+                        f"\tactual={actual_counts[seq_idx]},\n"
+                        f"\texpected={expected_counts[seq_idx]}\n"
+                        "----------------------------------\n"
                     )
                 return False
 

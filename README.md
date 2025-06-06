@@ -95,3 +95,65 @@ The different models and their set of constraints are
 - [Model 5](./models/model5.mzn) adds the constraint that allows the surface plies (top and bottom) to only take the -45° and 45° angles (D5).
 - [Model 6](./models/model6.mzn) adds the symmetric sequences constraint and the constraint prohibiting 4 or more consecutive plies of the same direction (D3, D4).
 - [Model 7](./models/model7.mzn) all optional constraint but the symmetry constraint (D2, D3, D5).
+
+## Checker
+
+A checker is available in the [checker](checker) directory to check the validity of a solution.
+It requires Python 3 to run, but no additional dependencies need to be installed.
+It can be launched from the root directory of the project with the command
+
+```sh
+python3 checker/main.py <instance_file> <solution_file>
+```
+
+Where `instance_file` is the path to the instance file and `solution_file` is the path to the solution file.
+
+### Format of the Instance File
+
+The input file must be in .dzn format and must contain the following elements:
+- edges: an array of tuples that represents the edges from the input graph.
+  The first element of the tuple is the parent (thickest sequence) while the second element is the child.
+  EXAMPLE: if we have the graph 0 -> 1 -> 2, the edges array will be:
+  `edges = [(0, 1), (1, 2)];`
+- counts: an array of arrays that represents the number of plies for each angle that must be present in
+  each stacking sequence.
+  Every sub-array must have 4 values (one for each angle).
+  EXAMPLE: the counts array for a structure with two sequences should look like this:
+  `counts = [|1, 2, 3, 4,|2, 3, 1, 0,|];`
+
+An example of a full instance file can be found [here](instances/3x3/random_grid_bench_3_3_173.dzn).
+
+### Format of the Solution File
+
+The solution file must be in .dzn format and must follow one of 2 formats:
+- The first contains two 2D arrays: seqs and indexes.
+  The sequences array contains the stacking sequences, while the indexes array contains the indexes of the
+  plies in the sequences. All the sub arrays (for the sequences AND the indexes) must be of the same
+  length, which is the length of the thickest stacking sequence.  
+  EXAMPLE:
+    ```dzn
+    seqs = [|1, 2, 3, 4|2, 3, 1, 0|];
+    indexes = [|0, 1, 2, 3|0, 1, 2, 3|];
+    ```
+  A more complete example of this format can be found [here](checker/example_solution.dzn).
+- The second contains a separate 1D array for each stacking sequence and for the indexes of the plies.
+  The sequences array contains the stacking sequences, while the indexes array contains the indexes of the
+  plies in the sequences. The arrays are allowed to be of different length.  
+  EXAMPLE:
+    ```dzn
+    seq0 = [1, 2, 3, 4];
+    seq1 = [2, 3, 1];
+    ...
+    i0 = [0, 1, 2, 3];
+    i1 = [0, 1, 2, 3];
+    ...
+    ```
+### Example
+
+The command
+
+```sh
+python3 checker/main.py instances/3x3/random_grid_bench_3_3_173.dzn checker/example_solution.dzn
+```
+
+Launched from the root of this project should launch and should pass all the constraint checks.

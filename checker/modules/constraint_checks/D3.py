@@ -1,4 +1,4 @@
-from checker.classes import CSInstance, CSSolution
+from modules.classes import CSInstance, CSSolution
 
 
 def check_d3(instance: CSInstance, solution: CSSolution, verbose: bool) -> bool:
@@ -12,18 +12,19 @@ def check_d3(instance: CSInstance, solution: CSSolution, verbose: bool) -> bool:
     sequences = solution.sequences()
 
     for seq in sequences:
-        for seq_idx in range(instance.n() - 3):
+        for seq_idx in range(len(seq) - 3):
             if (
                 seq[seq_idx] == seq[seq_idx + 1] and
                 seq[seq_idx] == seq[seq_idx + 2] and
-                seq[seq_idx] == seq[seq_idx + 3] and
-                seq[seq_idx] == seq[seq_idx + 4]
+                seq[seq_idx] == seq[seq_idx + 3]
             ):
                 if verbose:
                     print(
-                        f"Sequence {sequences.index(seq)} D3 constraint violation: "
-                        f"from ply {seq_idx} and {seq_idx + 3}, "
-                        f"{seq[seq_idx]}, {seq[seq_idx + 1]}, {seq[seq_idx + 2]}, and {seq[seq_idx + 3]} are equal."
+                        "----------------------------------\n"
+                        f"Sequence {sequences.index(seq)} D3 constraint violation: \n"
+                        f"\tfrom ply {seq_idx} and {seq_idx + 3}, \n"
+                        f"\t{seq[seq_idx]}, {seq[seq_idx + 1]}, {seq[seq_idx + 2]}, and {seq[seq_idx + 3]} are equal.\n"
+                        "----------------------------------\n"
                     )
                 return False
 

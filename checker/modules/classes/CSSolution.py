@@ -1,4 +1,4 @@
-from checker.utils.dzn_utils import read_dzn_array, read_dzn
+from modules.utils.dzn_utils import read_dzn_array, read_dzn
 import re
 
 
@@ -121,5 +121,5 @@ class CSSolution:
 
 
 if __name__ == '__main__':
-    sol = CSSolution("../../local/test_sol.dzn")
+    sol = CSSolution("../../../local/test_sol.dzn")
     print(sol)
