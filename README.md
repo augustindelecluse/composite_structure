@@ -1,10 +1,11 @@
 # csp_composite_structures
 
-Minizinc models and instances to solve a composite structure design problem.
+Minizinc models, instances and checker to solve a composite structure design problem.
 
 - The minizinc models are located in the `models` directory. Differences between each model are explained [at the bottom of this file](#minizinc-models).
 - The minizinc instances are located in the `instances` directory. Each subdirectory contains different size of instances.
 - Scripts to easily launch experiments are located in the `experiments` directory.
+- Solution checker is within the `checker` directory.
 
 ## Launching experiments
 
@@ -108,6 +109,8 @@ python3 checker/main.py <instance_file> <solution_file>
 
 Where `instance_file` is the path to the instance file and `solution_file` is the path to the solution file.
 
+The script also accepts the optional command `--verbose` for a detailed output.
+
 ### Format of the Instance File
 
 The input file must be in .dzn format and must contain the following elements:
@@ -156,4 +159,19 @@ The command
 python3 checker/main.py instances/3x3/random_grid_bench_3_3_173.dzn checker/example_solution.dzn
 ```
 
-Launched from the root of this project should launch and should pass all the constraint checks.
+Launched from the root of this project should pass all the constraint checks and gives an output similar to:
+
+```
+Report of checks:
+-----------------
+B1: PASSED
+B2: PASSED
+B3: PASSED
+B4: PASSED
+D1: PASSED
+D2: PASSED
+D3: PASSED
+D4: PASSED
+D5: PASSED
+-----------------
+```
