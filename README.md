@@ -2,6 +2,8 @@
 
 Minizinc models, instances and checker to solve a composite structure design problem.
 
+The problem and approach are described in Antoons, M., Delecluse, A., Zein, S., & Schaus, P. (2025). Modeling and Solving a Composite Structure Design Problem with Constraint Programming. In *31st International Conference on Principles and Practice of Constraint Programming (CP 2025)*. Schloss Dagstuhl–Leibniz-Zentrum für Informatik.
+
 - The minizinc models are located in the `models` directory. Differences between each model are explained [at the bottom of this file](#minizinc-models).
 - The minizinc instances are located in the `instances` directory. Each subdirectory contains different size of instances.
 - Scripts to easily launch experiments are located in the `experiments` directory.
